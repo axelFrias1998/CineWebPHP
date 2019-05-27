@@ -1,45 +1,8 @@
+<?php
+	include "header.php";
+?>
 <html>
 	<body>
-		<?php
-			include "header.php";
-			ini_set("display errors", E_ALL);
-	
-			//CONEXION
-			$host="127.0.0.1";
-			$port=3306;
-			$socket="";
-			$user="root";
-			$password="Suripanta.98";
-			$dbname="cinedb";
-
-			$con = new mysqli($host, $user, $password, $dbname, $port, $socket)
-				or die ('Could not connect to the database server' . mysqli_connect_error());
-
-			//$con->close();
-
-			
-			//COMPROBAR CONEXION
-			if (mysqli_connect_errno()) {
-				printf("Conexion fallida: %s\n", mysqli_connect_error());
-				exit();
-			}
-			
-			echo("Conexion exitosa");
-			
-			
-			//RECUPERAR LOS REGISTROS
-			
-			$res = mysqli_query($con, "SELECT * FROM TipoProyeccion");
-			
-			echo("<table  border=1>");
-			while ($registro = mysqli_fetch_row($res)){
-				echo("<tr><td>$registro[0]</td><td>$registro[1]</td><td>$registro[2]</td></tr>");
-			}
-			echo("</table>");
-			
-			mysqli_free_result($res);
-			mysqli_close($con);
-		?>
 		<form>
 			<div class="container">
 				<div class="row">
@@ -83,101 +46,35 @@
 						</div>
 
 						<div class="row">
-
-								<div class="col-lg-4 col-md-6 mb-4">
-									<div class="card h-100">
-									<a href="datosPelicula.php?idPelicula=" ><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-										<div class="card-body">
-											<h4 class="card-title">
-											<a href="#">Item One</a>
-											</h4>
-											<h5>$24.99</h5>
-											<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+							<?php
+								ini_set("display errors", E_ALL);
+								require "conexion.php";
+								$con = conexion();		
+								//RECUPERAR LOS REGISTROS
+								mysqli_query($con, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
+								$res = mysqli_query($con, "SELECT * FROM pelicula");?>
+								<?php while ($registro = mysqli_fetch_row($res)):?>
+							
+									<div class='col-lg-4 col-md-6 mb-4'>
+										<div class='card h-100'>
+											<a href="datosPelicula.php?clave=<?php echo $registro[0];?>"><img class='card-img-top' src="blob.php?id=<?php
+												echo $registro[0];?>" style='max-width: 700px; max-height: 400px' alt=""></a>
+											<div class='card-body'>
+												<h4 class='card-title'><a href="datosPelicula.php?clave=<?php echo$registro[0];?>"><?php echo  $registro[1];?></a>
+												</h4>
+												<h6>Director: <?php echo $registro[2];?></h6>
+											</div>
+											<div class='card-footer'>
+												<?php echo $registro[9]." horas.";?>
+											</div>
 										</div>
-										<div class="card-footer">
-											<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-										</div>
 									</div>
-								</div>
-
-								<div class="col-lg-4 col-md-6 mb-4">
-									<div class="card h-100">
-									<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-									<div class="card-body">
-										<h4 class="card-title">
-										<a href="#">Item Two</a>
-										</h4>
-										<h5>$24.99</h5>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-									</div>
-									<div class="card-footer">
-										<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-									</div>
-									</div>
-								</div>
-
-								<div class="col-lg-4 col-md-6 mb-4">
-									<div class="card h-100">
-									<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-									<div class="card-body">
-										<h4 class="card-title">
-										<a href="#">Item Three</a>
-										</h4>
-										<h5>$24.99</h5>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-									</div>
-									<div class="card-footer">
-										<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-									</div>
-									</div>
-								</div>
-
-								<div class="col-lg-4 col-md-6 mb-4">
-									<div class="card h-100">
-									<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-									<div class="card-body">
-										<h4 class="card-title">
-										<a href="#">Item Four</a>
-										</h4>
-										<h5>$24.99</h5>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-									</div>
-									<div class="card-footer">
-										<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-									</div>
-									</div>
-								</div>
-
-								<div class="col-lg-4 col-md-6 mb-4">
-									<div class="card h-100">
-									<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-									<div class="card-body">
-										<h4 class="card-title">
-										<a href="#">Item Five</a>
-										</h4>
-										<h5>$24.99</h5>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit amet.</p>
-									</div>
-									<div class="card-footer">
-										<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-									</div>
-									</div>
-								</div>
-
-								<div class="col-lg-4 col-md-6 mb-4">
-									<div class="card h-100">
-									<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-									<div class="card-body">
-										<h4 class="card-title">
-										<a href="#">Item Six</a>
-										</h4>
-										<h5>$24.99</h5>
-										<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-									</div>
-									<div class="card-footer">
-										<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-									</div>
-								</div>
+							
+								<?php
+									endwhile;
+									mysqli_free_result($res);
+									mysqli_close($con);				
+								?>
 							</div>
 						</div>
 					<!-- /.row -->
