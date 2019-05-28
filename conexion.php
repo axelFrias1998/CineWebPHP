@@ -9,11 +9,7 @@
 		$dbname="cinedb";
 		$con = new mysqli($host, $user, $password, $dbname, $port, $socket)
 			or die ('Could not connect to the database server' . mysqli_connect_error());
-		//COMPROBAR CONEXION
-		if (mysqli_connect_errno()) {
-			printf("Conexion fallida: %s\n", mysqli_connect_error());
-			exit();
-		}
+		
 		return $con;	
 	}
 ?>

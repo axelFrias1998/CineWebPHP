@@ -1,5 +1,14 @@
 <?php
+	session_start();
 	include "header.php";
+	if(isset($_SESSION["errorRol"])){
+		echo'<script>alert("El usuario no tiene acceso al sistema.")</script>';
+		$_SESSION["errorRol"] = null;
+	}
+	if(isset($_SESSION["peliculaId"]))
+		$_SESSION["peliculaId"] = null;
+	if(isset($_SESSION["funcion"]))
+		$_SESSION["funcion"] = null;
 ?>
 <html>
 	<body>
@@ -48,7 +57,7 @@
 						<div class="row">
 							<?php
 								ini_set("display errors", E_ALL);
-								require "conexion.php";
+								include_once "conexion.php";
 								$con = conexion();		
 								//RECUPERAR LOS REGISTROS
 								mysqli_query($con, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");

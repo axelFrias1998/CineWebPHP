@@ -1,6 +1,3 @@
-<?php
-    session_start();
-?>
 <html>
     <head>
         <meta charset="ISO-8859-1">
@@ -23,133 +20,96 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                    <?php
-                        if(empty($_SESSION["usuario"]) || !isset($_SESSION["usuario"])){
-                    ?>
-                    <li class="nav-item active">
-                        <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#modalLRForm" >Identifícate</button>
-                    </li>
-                    <?php
-                        }
-                        elseif(!empty($_SESSION["usuario"])){
-                    ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><?php echo "Bienvenido ".$_SESSION["usuario"];?></a>
-                    </li>
-                    <?php
-                        }
-                    ?>
-                    </ul>
+                    <?php if(!isset($_SESSION["usuario"])):?>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="modal" data-target="#modalRegistro">Registrarse</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="modal" data-target="#modalInicio">Iniciar Sesión</a>
+                            </li>
+                        </ul>
+                    <?php 
+                        endif; 
+                        if(isset($_SESSION["usuario"]) && !empty($_SESSION["usuario"])): ?>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" ><?php echo "Bienvenido ".$_SESSION["usuario"];?></a>
+                            </li>
+                                <li class="nav-item">
+                                    
+                                        <a class="nav-link" href="cerrarSesion.php" >Cerrar Sesión</a>
+                                    
+                                </li>
+                        </ul>
+                    <?php endif;?>
                 </div>
             </div>
         </nav>
-        <div class="modal fade" id="modalLRForm" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog cascading-modal" role="document">
-                <!--Contenido-->
+
+        <div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <link rel="stylesheet" href="css/Estilos.css">
+            <div class = "modal-dialog card card-signin my-5">
                 <div class="modal-content">
-
-                <!--Modaal en cascada-->
-                <div class="modal-c-tabs">
-
-                    <!-- Tabs de inicio de sesión o registro -->
-                    <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" data-toggle="tab" href="#panelInicio" role="tab"><i class="fas fa-user mr-1"></i>
-                        Inicio de sesión</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#panelRegistro" role="tab"><i class="fas fa-user-plus mr-1"></i>
-                        Registro</a>
-                    </li>
-                    </ul>
-
-                    <!--Páneles de identificación-->
-                    <div class="tab-content">
-                        <!--Panel inicio de sesión-->
-                        <div class="tab-pane fade in show active" id="panelInicio" role="tabpanel">
-
-                            <!--Cuerpo inicio de sesión-->
-                            <div class="modal-body mb-1">
-                                <form method="post">
-                                    <div class="md-form form-sm mb-5">
-                                        <label data-error="wrong" data-success="right" for="modalLRInput10">Correo</label>
-                                        <input type="email" id="correoLogin" class="form-control form-control-sm validate" name="correoLogin" placeholder="Correo">
-                                    </div>
-
-                                    <div class="md-form form-sm mb-4">
-                                        <label data-error="wrong" data-success="right" for="modalLRInput11">Contraseña</label>
-                                        <input type="password" id="passLogin" class="form-control form-control-sm validate" placeholder="Contraseña">
-                                    </div>
-                                    <div class="text-center mt-2">
-                                        <input type="submit" class="btn btn-info" value="Inicio de sesión">
-                                        <?php
-                                            if(isset($_POST["correoLogin"]))
-                                                $_SESSION["usuario"] = $_POST["correoLogin"];
-                                        ?>
-                                    </div>
-                                </form>
-                            </div>
-                            <!--Footer-->
-                            <div class="modal-footer">
-                                <!--<div class="options text-right">
-                                    <p class="pt-1">Already have an account? <a href="#" class="blue-text">Log In</a></p>
-                                </div>-->
-                                <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Cerrar</button>
-                            </div>
-
-                        </div>
-                    <!--/Panel inicio de sesión-->
-
-                    <!--Panel Registro-->
-                    <div class="tab-pane fade" id="panelRegistro" role="tabpanel">
-
-                        <!--Body-->
-                        <div class="modal-body">
-                            <form method="post">
-                                <div class="md-form form-sm mb-5">
-                                    <label data-error="wrong" data-success="right" for="modalLRInput12">Nombre</label>
-                                    <input type="text" id="nombreRegistro" class="form-control form-control-sm validate" placeholder="Nombre">
-                                    
-                                </div>
-                                <div class="md-form form-sm mb-5">
-                                    <label data-error="wrong" data-success="right" for="modalLRInput12">Correo</label>
-                                    <input type="email" id="emailRegistro" class="form-control form-control-sm validate" placeholder="Correo">
-                                    
-                                </div>
-
-                                <div class="md-form form-sm mb-5">
-                                    <label data-error="wrong" data-success="right" for="modalLRInput13">Contraseña</label>
-                                    <input type="password" id="passRegistro" class="form-control form-control-sm validate" placeholder="Contraseña">
-                                    
-                                </div>
-
-                                <div class="md-form form-sm mb-4">
-                                    <label data-error="wrong" data-success="right" for="modalLRInput14">Repite contraseña</label>
-                                    <input type="password" id="modalLRInput14" class="form-control form-control-sm validate" placeholder="Repite contraseña">
-                                </div>
-
-                                <div class="text-center form-sm mt-2">
-                                    <input type="submit" class="btn btn-info" value="Regístrate"><!--<i class="fas fa-sign-in ml-1"></i>-->
-                                </div>
-                            </form>
-                        </div>
-                        <!--Footer-->
-                        <div class="modal-footer">
-                        <!--<div class="options text-right">
-                            <p class="pt-1">Already have an account? <a href="#" class="blue-text">Log In</a></p>
-                        </div>-->
-                        <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Close</button>
-                        </div>
+                    <div class="modal-header">
+                        <button type="button" class="close cerrarModal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     </div>
-                    <!--/.Panel Registro-->
+                <div class="container">
+                    <div class="modal-body card-body">
+                        <h5 class="card-title text-center"><b>Registrarse</b></h5>
+                        <form action="registro.php" class="form-signin" method="POST">
+                            <div class="form-label-group">
+                                <input type="text" id="nombreUsuario" name="nombreUsuario" class="form-control" placeholder="Nombre" required autofocus>
+                                <label for="nombreUsuario">Nombre</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="email" id="emailUsuario" name="emailUsuario" class="form-control" placeholder="Cuenta de e-mail" required>
+                                <label for="emailUsuario">Cuenta de e-mail</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="password" id="passUsuario" name="passUsuario" class="form-control" placeholder="Contraseña" required>
+                                <label for="passUsuario">Contraseña</label>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="password" id="pass2Usuario" name="pass2Usuario" class="form-control" placeholder="Confirmar contraseña" required>
+                                <label for="pass2Usuario">Confirmar contraseña</label>
+                            </div>
+                            <input class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value ="Registrarme"/>
+                            <hr class="my-4">
+                        </form>
                     </div>
-
                 </div>
                 </div>
-                <!--/.Content-->
             </div>
         </div>
+	<!-- Ventana Modal del Inicio de Sesión de los Usuarios -->
+        <div class="modal fade" id="modalInicio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <link rel="stylesheet" href="Estilos2.css">
+            <div class = "modal-dialog card card-signin my-5">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close cerrarModal" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="container">
+                        <div class="modal-body card-body">
+                            <h5 class="card-title text-center">Iniciar Sesión</h5>
+                            <form class="form-signin" id="IS" name="IS" action="login.php" method="POST">
+                                <div class="form-label-group">
+                                    <input type="email" id="emailUsuarioIS" name="emailUsuarioIS" class="form-control" placeholder="Cuenta de e-mail" required>
+                                    <label for="emailUsuarioIS">Correo</label>
+                                </div>
+                                <div class="form-label-group">
+                                    <input type="password" id="passUsuarioIS" name="passUsuarioIS" class="form-control" placeholder="Contraseña" required>
+                                    <label for="passUsuarioIS">Contraseña</label>
+                                </div>
+                                <input class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value = "Iniciar sesión"/>
+                                <hr class="my-4">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>	
         <script src="vendor\jquery\jquery.js"></script>
         <script src="vendor\bootstrap\js\bootstrap.js"></script> 
     </body>
