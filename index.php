@@ -66,15 +66,14 @@
 							
 									<div class='col-lg-4 col-md-6 mb-4'>
 										<div class='card h-100'>
-											<a href="datosPelicula.php?clave=<?php echo $registro[0];?>"><img class='card-img-top' src="blob.php?id=<?php
-												echo $registro[0];?>" style='max-width: 700px; max-height: 400px' alt=""></a>
+											<a href="datosPelicula.php?c=<?php echo $registro[0];?>"><img class='card-img-top' src="data:image/jpeg;base64, <?php echo base64_encode($registro[5]);?>" style='max-width: 600px; max-height: 350px'></a>
 											<div class='card-body'>
-												<h4 class='card-title'><a href="datosPelicula.php?clave=<?php echo$registro[0];?>"><?php echo  $registro[1];?></a>
+												<h4 class='card-title'><a href="datosPelicula.php?c=<?php echo$registro[0];?>"><?php echo  $registro[1];?></a>
 												</h4>
 												<h6>Director: <?php echo $registro[2];?></h6>
 											</div>
 											<div class='card-footer'>
-												<?php echo $registro[9]." horas.";?>
+												Duración: <?php echo substr($registro[9], 1, 4);?>
 											</div>
 										</div>
 									</div>
@@ -93,7 +92,8 @@
 		<!-- /.row -->
 			</div>
 		</form>
-
-		
+	<?php 
+		include_once "footer.php";
+	?>
 	</body>
 </html>
