@@ -1,5 +1,6 @@
 <html>
     <head>
+        <link rel="icon" href="img/Cinezone.png">
         <meta charset="ISO-8859-1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -14,7 +15,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
-                <img src="img/Cinezone.jpg" width="10%" height="10%">
+                <img src="img/Cinezone.png" width="10%" height="10%">
                 <a class="navbar-brand" href="index.php">Cinezona</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -34,7 +35,7 @@
                         if(isset($_SESSION["usuario"]) && !empty($_SESSION["usuario"])): ?>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#" ><?php echo "Bienvenido ".$_SESSION["usuario"];?></a>
+                                <a class="nav-link" href="perfil.php" >Perfil</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="cerrarSesion.php">Cerrar Sesión</a>

@@ -5,6 +5,10 @@
 		echo'<script>alert("El usuario no tiene acceso al sistema.")</script>';
 		$_SESSION["errorRol"] = null;
 	}
+	if(isset($_SESSION["ContraseniaIncorrecta"])){
+		echo'<script>alert("Datos incorrectos")</script>';
+		$_SESSION["ContraseniaIncorrecta"] = null;		
+	}
 	if(isset($_SESSION["peliculaId"]))
 		$_SESSION["peliculaId"] = null;
 	if(isset($_SESSION["funcion"]))
@@ -13,7 +17,7 @@
 <html>
 	<body>
 		<form>
-			<div class="container">
+			<div class="container jumbotron">
 				<div class="row">
 					<div class="col-lg-3">
 						<h1 class="my-4">Shop Name</h1>

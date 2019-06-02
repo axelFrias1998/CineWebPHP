@@ -1,0 +1,142 @@
+<?php
+    session_start();
+    if(isset($_SESSION["datosIncorrectos"])){
+        echo "<script>alert('Datos incorrectos');</script>";
+        $_SESSION["datosIncorrectos"] = null;
+    }
+    if((!isset($_SESSION["usuario"]) && empty($_SESSION["usuario"]))){
+        header("Location: index.php");
+    }
+    else
+        include_once "header.php";
+?>
+<html>
+    <body><br><br><br>
+        <div class="container">
+        <?php
+            ini_set("display errors", E_ALL);
+            include_once "conexion.php";
+            $con = conexion();		
+            //RECUPERAR LOS REGISTROS
+            mysqli_query($con, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
+            $res = mysqli_query($con, "SELECT * FROM usuario where Id = ".$_SESSION["id"].";");
+            if ($registro = mysqli_fetch_row($res)):?>
+                <div class="row my-2">
+                    <div class="col-lg-8 order-lg-2">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a href="" data-target="#perfil" data-toggle="tab" class="nav-link active">Datos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" data-target="#historial" data-toggle="tab" class="nav-link">Historial de órdenes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" data-target="#editar" data-toggle="tab" class="nav-link">Editar</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content py-4">
+                            <div class="tab-pane active" id="perfil">
+                                <h5 class="mb-3">Perfil de usuario</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6>Nombre:</h6>
+                                        <p>
+                                            <?php echo $registro[1];?>
+                                        </p>
+                                        <h6>Correo:</h6>
+                                        <p>
+                                            <?php echo $registro[2];?>
+                                        </p>
+                                        <h6>Saldo:</h6>
+                                        <p>
+                                            $<?php echo $registro[4];?>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--/row-->
+                            </div>
+                            <div class="tab-pane" id="editar">
+                                <form role="form" action="cambio.php" method="POST">
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Nombre</label>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" name = "txtNombre" type="text" value="<?php echo $registro[1];?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Coreo</label>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" name = "txtCorreo" type="email" value="<?php echo $registro[2];?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Agregar saldo</label>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" name = "txtSaldo" type="number" min="0" max="1000">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Nueva Contraseña</label>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" type="password" name = "txtNuevaPass">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Contraseña actual:</label>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" type="password" name = "txtActualPass" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label"></label>
+                                        <div class="col-lg-9">
+                                            <input type="submit" class="btn btn-danger" name="borrar" value="Eliminar cuenta">
+                                            <input type="submit" class="btn btn-primary" name="actualizar" value="Guardar cambios">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+            <?php endif;
+                mysqli_free_result($res);
+                mysqli_close($con);
+            ?>
+                            <div class="tab-pane" id="historial">
+                                <div class="alert alert-info alert-dismissable">
+                                    <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                                </div>
+                                <table class="table table-hover table-striped">
+                                    <tbody>                                    
+                                        <tr>
+                                            <td>
+                                            <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus. 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus. 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros. 
+                                            </td>
+                                        </tr>
+                                    </tbody> 
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </body>
+</html>

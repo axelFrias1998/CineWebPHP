@@ -20,10 +20,12 @@
             if(mysqli_num_rows($existe) == 0){
                 $insert = mysqli_query($con, "insert into usuario (Nombre, Email, Pass, Saldo, Rol_Id) values ('$nombre', '$correo', '$pass', 0, 2);");
                 if($insert){
-                    $idRes = mysqli_query($con, "Select Id from usuario where Email = '$correo';");
+                    $idRes = mysqli_query($con, "Select Id, Nombre, Pass, Saldo, Email from usuario where Email = '$correo';");
                     if($id = mysqli_fetch_row($idRes)){
-                        $_SESSION["usuario"] = $nombre;
-                        $_SESSION["id"] = $id[0];
+                        $_SESSION["usuario"] = $contrasenia[1];
+                        $_SESSION["id"] = $contrasenia[0];
+                        $_SESSION["correo"] = $contrasenia[4];
+                        $_SESSION["saldo"] = $contrasenia[3];
                         header("Location: index.php");
                     }
                     mysqli_free_result($idRes);
