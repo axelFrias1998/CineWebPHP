@@ -24,6 +24,7 @@
         $pdf->Cell(0,10,'NO REVENDAS TUS ENTRADAS.',0,0,'C');
         $pdf -> Output();
         ob_end_flush();
+        
     }
     
 ?>

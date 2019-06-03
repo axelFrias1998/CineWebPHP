@@ -34,7 +34,12 @@
             mysqli_free_result($existe);
             mysqli_close($con);
         }
-    }
-    else
-        echo'<script>alert("No puedes acceder a este formulario.");window.location.href="index.php";</script>';
+        else{
+            $_SESSION["passDif"] = 1;
+            header("Location: index.php");
+        }
+    }else{
+        $_SESSION["errorDesconocido"] = 1;
+        header("Location: index.php");
+    }   
 ?>

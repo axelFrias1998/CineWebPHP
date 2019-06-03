@@ -13,6 +13,18 @@
 		$_SESSION["peliculaId"] = null;
 	if(isset($_SESSION["funcion"]))
 		$_SESSION["funcion"] = null;
+	if(isset($_SESSION["total"]))
+		$_SESSION["total"] = null;
+	if(isset($_SESSION["cantidad"]))
+		$_SESSION["cantidad"] = null;
+	if(isset($_SESSION["passDif"])){
+		echo'<script>alert("Contraseñas no coinciden")</script>';
+		$_SESSION["passDif"] = null;	
+	}
+	if(isset($_SESSION["errorDesconocido"])){
+		echo'<script>alert("Ha ocurrido un error durante tu registro. Vuelve a intentarlo.")</script>';
+		$_SESSION["errorDesconocido"] = null;	
+	}
 ?>
 <html>
 	<body>
@@ -20,33 +32,61 @@
 			<div class="container jumbotron">
 				<div class="row">
 					<div class="col-lg-3">
-						<h1 class="my-4">Shop Name</h1>
-						<div class="list-group">
-						<a href="#" class="list-group-item">Category 1</a>
-						<a href="#" class="list-group-item">Category 2</a>
-						<a href="#" class="list-group-item">Category 3</a>
+						<center>
+						<p style="color:#4C236F">
+							<h1 class="my-4"> <p style="color:#4C236F"> Avengers: Endgame </p></h1> 
+							<h2> <p style="color:#4C236F"> Sólo en cines </p></h2> 
+						</center>
+						<div class="list-group"> 
+							<div>
+								<img align="left" src="img/11.jpg" style="max-width: 900px; max-height: 350px"> 
+								<img src="img/22.jpg" style="max-width: 900px; max-height: 350px">
+								<img src="img/33.jpg" style="max-width: 900px; max-height: 350px">
+								<img src="img/44.jpg" style="max-width: 900px; max-height: 350px">
+								<img src="img/55.jpg" style="max-width: 900px; max-height: 350px">
+							</div>
+						</div>
 					</div>
-				</div>
 		<!-- /.col-lg-3 -->
 
 					<div class="col-lg-9">
-
+					<!----------------AGREGAR---------------> <center> <h1> <b> <p style="color:#FF5733;"> PRÓXIMOS ESTRENOS </p> </b> </h1> </center> <!--------FIN------------->
 						<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
 							<ol class="carousel-indicators">
 								<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 								<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 								<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+					<!--------AGREGAR------------->
+								<li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+								<li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+					<!-----------FIN---------->
 							</ol>
 						<div class="carousel-inner" role="listbox">
 							<div class="carousel-item active">
-								<img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
+								<!----AG---> <img class="d-block img-fluid" src="img/Yaz.png" style="max-width: 900px; max-height: 350px" alt="First slide"> <!---FIN---->
 							</div>
 							<div class="carousel-item">
-								<img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
+								<!----AG---> <img class="d-block img-fluid" src="img/Dark.png" style="max-width: 900px; max-height: 350px" alt="Second slide"> <!---FIN---->
 							</div>
 							<div class="carousel-item">
-								<img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
+								<!----AG---> <img class="d-block img-fluid" src="img/Lion2.png" style="max-width: 900px; max-height: 350px" alt="Third slide"> <!---FIN---->
 							</div>
+							<!-----------------AGREGAR---------------->
+							<div class="carousel-item">
+								<img class="d-block img-fluid" src="img/Spiderman2.png" style="max-width: 900px; max-height: 350px" alt="Quarter slide">
+							</div>
+							<div class="carousel-item">
+								<img class="d-block img-fluid" src="img/Itt.png" style="max-width: 900px; max-height: 350px" alt="Fifth slide">
+							</div>
+							<div class="carousel-item">
+								<img class="d-block img-fluid" src="img/Male2.png" style="max-width: 900px; max-height: 350px" alt="Sixth slide">
+							</div>
+							<div class="carousel-item">
+								<img class="d-block img-fluid" src="img/Toy.png" style="max-width: 900px; max-height: 350px" alt="Seventh slide">
+							</div>
+							<!---------------------FIN---------------->
 						</div>
 							<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -57,7 +97,8 @@
 								<span class="sr-only">Next</span>
 							</a>
 						</div>
-
+						<br>
+						<b> <h1 style="color:#FF5733;"> ENTRADAS A LA VENTA </h1> </b><br><br>
 						<div class="row">
 							<?php
 								ini_set("display errors", E_ALL);

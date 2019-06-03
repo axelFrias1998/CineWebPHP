@@ -11,10 +11,13 @@
             mysqli_query($con, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
             $res = mysqli_query($con, "SELECT Pass FROM usuario where Id = ".$_SESSION["id"].";");
             if ($registro = mysqli_fetch_row($res)){
-                if(strcmp($_POST["txtActualPass"], $registro[0])){
+                if(strcmp($_POST["txtActualPass"], $registro[0]) == 0){
                     mysqli_query($con, "DELETE FROM usuario WHERE Id = ".$_SESSION["id"].";");
                     $_SESSION["usuario"] = null;
                     $_SESSION["id"] = null;
+                    $_SESSION["saldo"] = null;
+                    $_SESSION["correo"] = null;
+                    header("Location: index.php");
                 }else{
                     header("Location: perfil.php");
                     echo "<script>alert('Contraseña incorrecta');</script>";
@@ -47,8 +50,10 @@
                     }
                     if((isset($_POST["txtSaldo"]) && !empty($_POST["txtSaldo"])) && (!strcmp($_POST["txtActualPass"], $registro[0]))){
                         $saldoNuevo = $registro[1] + $_POST["txtSaldo"];
-                        if(mysqli_query($con, "UPDATE usuario SET Saldo = ".$saldoNuevo." WHERE Id = ".$_SESSION["id"].";"))
+                        if(mysqli_query($con, "UPDATE usuario SET Saldo = ".$saldoNuevo." WHERE Id = ".$_SESSION["id"].";")){
+                            $_SESSION["saldo"] = $saldoNuevo;
                             header("Location: perfil.php");
+                        }
                         else
                             echo mysqli_error($con);
                     }

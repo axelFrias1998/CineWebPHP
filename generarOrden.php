@@ -21,4 +21,7 @@
                 echo mysqli_error($con);
     }
     creaPDF($_SESSION["usuario"], $_SESSION["correo"], $_SESSION["total"],$cont);
+    $_SESSION["funcion"] = null;
+    $_SESSION["total"] = null;
+    $_SESSION["cantidad"] = null;
 ?>

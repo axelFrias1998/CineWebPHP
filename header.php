@@ -1,7 +1,6 @@
 <html>
     <head>
         <link rel="icon" href="img/Cinezone.png">
-        <meta charset="ISO-8859-1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -21,7 +20,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <?php if(!isset($_SESSION["usuario"])):?>
+                    <?php if(!isset($_SESSION["usuario"])|| empty($_SESSION["usuario"])):?>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
                                 <a class="nav-link" href="#" data-toggle="modal" data-target="#modalRegistro">Registrarse</a>
@@ -66,11 +65,11 @@
                                 <label for="emailUsuario">Cuenta de e-mail</label>
                             </div>
                             <div class="form-label-group">
-                                <input type="password" id="passUsuario" name="passUsuario" class="form-control" placeholder="Contraseña" required>
+                                <input pattern=".{6,}"   required title="Longitud mínima de seis caracteres" type="password" id="passUsuario" name="passUsuario" class="form-control" placeholder="Contraseña" required>
                                 <label for="passUsuario">Contraseña</label>
                             </div>
                             <div class="form-label-group">
-                                <input type="password" id="pass2Usuario" name="pass2Usuario" class="form-control" placeholder="Confirmar contraseña" required>
+                                <input pattern=".{6,}"   required title="Longitud mínima de seis caracteres" type="password" id="pass2Usuario" name="pass2Usuario" class="form-control" placeholder="Confirmar contraseña" required>
                                 <label for="pass2Usuario">Confirmar contraseña</label>
                             </div>
                             <input class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value ="Registrarme"/>
@@ -111,5 +110,6 @@
         </div>	
         <script src="vendor\jquery\jquery.js"></script>
         <script src="vendor\bootstrap\js\bootstrap.js"></script> 
+
     </body>
 </html>

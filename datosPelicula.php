@@ -10,8 +10,9 @@
 <html>
 	<body>
         <br><br>
-        <div class="container">
+        <div class="container jumbotron">
             <div class="row">
+            <br><br><br><br><br><br>
                 <?php
                     ini_set("display errors", E_ALL);
                     include_once "conexion.php";
@@ -21,7 +22,7 @@
                     if ($registro = mysqli_fetch_row($res)):?>
                         <!--COlumna 1-->
                         <div class="row align-items-center my-5">
-                            <div class="col-3"> <br> <br> <br>
+                            <div class="col-3"> 
                                 <img class="img-fluid rounded" src="data:image/jpeg;base64, <?php echo base64_encode($registro[5]);?>" style="max-width: 1000px; max-height: 360px">
                             </div>
                         </div>
@@ -47,7 +48,7 @@
                         while($registro = mysqli_fetch_row($res)):
                 ?>
                             <a  data-toggle="tooltip" title="Compra" href="compra.php?f=<?php echo $registro[0];?>"><button type="button" class="list-group-item list-group-item-action" ><?php echo $registro[1].
-                            "\t".$registro[2]."\t".$registro[3];?></button></a>
+                            "\t".substr($registro[2], 0, 5)."\t".$registro[3];?></button></a>
                             
                 <?php
                     endwhile;
@@ -60,7 +61,6 @@
             </div>
             <!-- /.container -->
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br>
             <!-- Bootstrap core JavaScript -->
             <script src="vendor/jquery/jquery.min.js"></script>
             <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -12,7 +12,7 @@
 ?>
 <html>
     <body><br><br><br>
-        <div class="container">
+        <div class="container jumbotron">
         <?php
             ini_set("display errors", E_ALL);
             include_once "conexion.php";
@@ -64,7 +64,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Coreo</label>
+                                        <label class="col-lg-3 col-form-label form-control-label">Correo</label>
                                         <div class="col-lg-9">
                                             <input class="form-control" name = "txtCorreo" type="email" value="<?php echo $registro[2];?>">
                                         </div>
@@ -101,36 +101,31 @@
                 mysqli_close($con);
             ?>
                             <div class="tab-pane" id="historial">
-                                <div class="alert alert-info alert-dismissable">
-                                    <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
-                                </div>
                                 <table class="table table-hover table-striped">
-                                    <tbody>                                    
-                                        <tr>
-                                            <td>
-                                            <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                            <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                            <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus. 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                            <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus. 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                            <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros. 
-                                            </td>
-                                        </tr>
+                                    <tbody>   
+                                        <?php
+                                            $con = conexion();
+                                            mysqli_query($con, "SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'");
+                                            $res = mysqli_query($con, "SELECT orden.Fecha, orden.Monto, pelicula.Titulo
+                                                                        FROM orden
+                                                                        inner join funcion on orden.Funcion_Id = funcion.Id
+                                                                        inner join pelicula on funcion.Pelicula_Id = pelicula.Id
+                                                                        WHERE orden.Usuario_Id = ".$_SESSION["id"].";");
+                                            while ($registro = mysqli_fetch_row($res)):
+                                        ?>                                 
+                                            <tr>
+                                                <td>
+                                                <span class="float-right font-weight-bold"><?php echo substr($registro[0], 0, 10);?></span>
+                                                    <b><?php echo "Costo: $";?></b>
+                                                    <?php echo $registro[1];?>&nbsp;
+                                                    <b><?php echo"Película: ";?></b>
+                                                    <?php echo $registro[2];?>
+                                                </td>
+                                            </tr>
+                                        <?php endwhile;
+                                            mysqli_free_result($res);
+                                            mysqli_close($con);
+                                        ?>
                                     </tbody> 
                                 </table>
                             </div>
@@ -138,5 +133,9 @@
                     </div>
                 </div>
         </div>
+    <?php 
+		include_once "footer.php";
+	?>
     </body>
+    
 </html>

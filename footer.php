@@ -12,9 +12,9 @@
         <link href="css/shop-homepage.css" rel="stylesheet">
     </head>
     <body>
-        <footer class="py-5 bg-dark">
+        <footer style="bottom:0; position:fixed; clear:both; width:100%; height:100px;" class="py-5 bg-dark">
             <div class="container">
-                <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+                <p class="m-0 text-center text-white">Copyright &copy; Cinezona 2019</p>
             </div>
         </footer>
     </body>

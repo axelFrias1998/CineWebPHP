@@ -12,8 +12,7 @@
 ?>
 <html>
     <body>
-    <br>
-    <div class = "jumbotron">
+    <br><br>
         <div class = "container jumbotron">
             <div class = "row">
             <?php
@@ -30,26 +29,30 @@
                             <hr>
                             <center><img src="data:image/jpeg;base64, <?php echo base64_encode($registro[1]);?>" alt="200x200"></center>
                             <hr>
-                            <br>
-                            <p><b>Título: </b><?php echo $registro[0];?></p>
-                            <p><b>Clasificación: </b><?php echo $registro[2];?></p>
-                            <p><b>Versión: </b><?php echo $registro[3];?></p>
-                            <p><b>Fecha: </b><?php echo $registro[4];?></p>
-                            <p><b>Horario: </b><?php echo $registro[5];?></p>
-                            <p><b>Sala: </b><?php echo $registro[6];?></p>
+                            <p><font color="F9821F"><b>Título: </b></font><?php echo $registro[0];?></p>
+                            <p><font color="F9821F"><b>Clasificación: </b></font><?php echo $registro[2];?></p>
+                            <p><font color="F9821F"><b>Versión: </b></font><?php echo $registro[3];?></p>
+                            <p><font color="F9821F"><b>Fecha: </b></font><?php echo $registro[4];?></p>
+                            <p><font color="F9821F"><b>Horario: </b></font><?php echo $registro[5];?></p>
+                            <p><font color="F9821F"><b>Sala: </b></font><?php echo $registro[6];?></p>
                         </div>
                 </div>
                 <div class="col">
                     <form method="post" action="asientos.php" onsubmit="return validacion()">
                         <div class ="form-group">
-                            <h3>Selecciona tus boletos</h3><br>
+                            <h2><font color="#F0591C"><b>Selecciona tus boletos</b></font></h2><br>
                             Boleto <?php echo $registro[3];?>: | $<label id="costo"><?php echo $registro[7]?></label><br>
-                            <input type="button" name="menos" value = "Restar" onclick="op('resta')"/>&nbsp;<label id="num">0</label>&nbsp;<input type="button" name="mas" value = "Sumar" onclick="op('suma')"/><br>
                             
-                            Total a pagar: $<label name="total" id="resultadoBoletos">0</label>
+                            <button type="button" class="btn btn-primary" name="menos" style="background:#FFFFFF" onclick="op('resta')"><b><font color="#1C7EF0">  - </font></b></button>
+                            <label id="num" name="cantidadBoletos">0</label>
+                            <button type="button" class="btn btn-primary" name="mas" style="background:#FFFFFF" onclick="op('suma')"><b><font color="#1C7EF0">  + </font></b></button> <br>
+                                
+                            Total a pagar: $<label name="total" id="resultadoBoletos">0</label><br>
+                            
                             <input type = "hidden" name = "total" id = "inputTotal"/><input type = "hidden" name = "cantidad" id = "cantidadBoletos"/><br>
-                            <button type="button" class="btn btn-secondary" href='index.php'>Cancelar</button>&nbsp;
-                            <input type="submit" title = "Continuar" class="btn btn-danger">
+                            <button type="button" class="btn btn-secondary" style="background:#CEC5BF " color="#FFFFFF" onclick="location.href='index.php'"><b><font color="#FFFFFF"> Cancelar </font></b></button>
+                            <!--<button type="button" class="btn btn-secondary" href='index.php'>Cancelar</button>-->&nbsp;
+                            <input type="submit" style="background:#F83714; font-color: #FFFFFF " title = "Continuar" class="btn btn-danger">
                         </div>
                     </form>
                     <div id="alerta" class="alert alert-danger" role="alert" style="visibility:hidden;">
@@ -65,7 +68,7 @@
                 
             </div>
         </div>
-    </div>
+    
     <?php
         include_once "footer.php";
     ?>

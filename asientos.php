@@ -13,8 +13,8 @@
         <title>Selecciona tus asientos</title>
     </head>
     <body>
-        <div class="jumbotron">
-            <div class = "container">
+        <br>
+            <div class = "container jumbotron">
                 <div class = "row">
                     <?php
                         ini_set("display errors", E_ALL);
@@ -129,13 +129,9 @@
                                         endwhile;
                                         mysqli_free_result($res);
                                         mysqli_close($con);?>
-                                        <tr>
-                                            <td>
-                                                <input type="submit" id="submit" name="submit" value="Revisar">
-                                            </td>
-                                        </tr>
                                     </table>
                                 </center>
+                                <center><input class="btn btn-danger" type="submit" id="submit" name="submit" value="¡Compra!"></center>
                                 <div id="alerta" class="alert alert-danger" role="alert" style="visibility:hidden;">
                                     <h4 class="alert-heading">¡Oh, no! :(</h4>
                                     <p>Selecciona <?php echo $_POST["cantidad"];?> boletos para continuar.</P>                                    
@@ -149,7 +145,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+    <?php
+        include_once "footer.php";
+    ?>
     </body>
 </html>
 <script>
