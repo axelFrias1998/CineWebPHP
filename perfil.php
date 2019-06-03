@@ -11,6 +11,9 @@
         include_once "header.php";
 ?>
 <html>
+    <head>
+		<title>Perfil</title>
+	</head>
     <body><br><br><br>
         <div class="container jumbotron">
         <?php

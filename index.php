@@ -27,6 +27,9 @@
 	}
 ?>
 <html>
+	<head>
+	<title>Bienvenido a Cinezona</title>
+	</head>
 	<body>
 		<form>
 			<div class="container jumbotron">

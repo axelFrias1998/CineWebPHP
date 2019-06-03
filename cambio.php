@@ -13,6 +13,8 @@
             if ($registro = mysqli_fetch_row($res)){
                 if(strcmp($_POST["txtActualPass"], $registro[0]) == 0){
                     mysqli_query($con, "DELETE FROM usuario WHERE Id = ".$_SESSION["id"].";");
+                    mysqli_query($con, "DELETE FROM orden WHERE Usuario_Id = ".$_SESSION["id"].";" );
+                    mysqli_query($con, "UPDATE asientofuncion SET Disponible = true, Usuario_Id = null WHERE Usuario_Id = ".$_SESSION["id"].";");
                     $_SESSION["usuario"] = null;
                     $_SESSION["id"] = null;
                     $_SESSION["saldo"] = null;

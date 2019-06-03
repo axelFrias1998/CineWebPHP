@@ -11,6 +11,9 @@
     }  
 ?>
 <html>
+    <head>
+		<title>Adquiere tus boletos</title>
+	</head>
     <body>
     <br><br>
         <div class = "container jumbotron">

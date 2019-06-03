@@ -75,6 +75,7 @@
                                 </center>
                                 <hr>
                                 <center>
+                                <center>PANTALLA</center>
                                     <table>
                                     <?php 
                                         $res = mysqli_query($con, "SELECT asientofuncion.Asiento_Id, asiento.Lugar, asientofuncion.Funcion_Id, asientofuncion.Disponible

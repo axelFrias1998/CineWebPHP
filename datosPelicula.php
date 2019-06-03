@@ -8,6 +8,9 @@
     }
 ?>
 <html>
+    <head>
+		<title>Datos de la película</title>
+	</head>
 	<body>
         <br><br>
         <div class="container jumbotron">

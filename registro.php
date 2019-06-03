@@ -22,13 +22,14 @@
                 if($insert){
                     $idRes = mysqli_query($con, "Select Id, Nombre, Pass, Saldo, Email from usuario where Email = '$correo';");
                     if($id = mysqli_fetch_row($idRes)){
-                        $_SESSION["usuario"] = $contrasenia[1];
-                        $_SESSION["id"] = $contrasenia[0];
-                        $_SESSION["correo"] = $contrasenia[4];
-                        $_SESSION["saldo"] = $contrasenia[3];
-                        header("Location: index.php");
+                        $_SESSION["usuario"] = $id[1];
+                        $_SESSION["id"] = $id[0];
+                        $_SESSION["correo"] = $id[4];
+                        $_SESSION["saldo"] = $id[3];
+                        header("Location: perfil.php");
                     }
                     mysqli_free_result($idRes);
+                    $_SESSION["usuario"] = $id[1];
                 }
             }
             mysqli_free_result($existe);
